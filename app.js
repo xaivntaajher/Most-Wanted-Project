@@ -1,195 +1,197 @@
-
 function app(people) {
-    displayWelcome();
-    runSearchAndMenu(people);
-    return exitOrRestart(people);
+  displayWelcome();
+  runSearchAndMenu(people);
+  return exitOrRestart(people);
 }
 
 function displayWelcome() {
-    alert('Hello and welcome to the Most Wanted search application!');
+  alert("Hello and welcome to the Most Wanted search application!");
 }
 
 function runSearchAndMenu(people) {
-    const searchResults = searchPeopleDataSet(people);
+  const searchResults = searchPeopleDataSet(people);
 
-    if (searchResults.length > 1) {
-        displayPeople('Search Results', searchResults);
-    }
-    else if (searchResults.length === 1) {
-        const person = searchResults[0];
-        mainMenu(person, people);
-    }
-    else {
-        alert('No one was found in the search.');
-    }
+  if (searchResults.length > 1) {
+    displayPeople("Search Results", searchResults);
+  } else if (searchResults.length === 1) {
+    const person = searchResults[0];
+    mainMenu(person, people);
+  } else {
+    alert("No one was found in the search.");
+  }
 }
 
 function searchPeopleDataSet(people) {
+  const searchTypeChoice = validatedPrompt(
+    "Please enter in what type of search you would like to perform.",
+    [
+      "id",
+      "name",
+      "traits",
+      "parents",
+      "currentSpouse",
+    ]
+  );
 
-    const searchTypeChoice = validatedPrompt(
-        'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'traits', 'gender', 'dob', 'height', 'weight', 'eyecolor', 'occupation', 'parents', 'currentSpouse']
-    );
+  let results = [];
+  switch (searchTypeChoice) {
+    case "id":
+      results = searchById(people);
+      break;
+    case "name":
+      results = searchByName(people);
+      break;
+    case "traits":
+      results = searchByTrait(people);
+      break;
+    case "gender":
+      results = searchByGender(people);
+      break;
+    case "dob":
+      results = searchByDob(people);
+      break;
+    case "height":
+      results = searchByHeight(people);
+      break;
+    case "weight":
+      results = searchByWeight(people);
+      break;
+    case "eyecolor":
+      results = searchByEyeColor(people);
+      break;
+    case "occupation":
+      results = searchByOccupation(people);
+      break;
+    case "parents":
+      results = searchByParents(people);
+      break;
 
-    let results = [];
-    switch (searchTypeChoice) {
-        case 'id':
-            results = searchById(people);
-            break;
-        case 'name':
-            results = searchByName(people);
-            break;
-        case 'gender':
-            results = searchByGender(people);
-            break;
-        case 'dob':
-            results = searchByDob(people);
-            break;
-        case 'height':
-            results = searchByHeight(people);
-            break;
-        case 'weight':
-            results = searchByWeight(people);
-            break;
-        case 'eyecolor':
-            results = searchByEyeColor(people);
-            break;
-        case 'occupation':
-            results = searchByOccupation(people);
-            break;    
-        case 'currentspouse':
-            results = searchByCurrentSpouse(people);
-            break;    
-            
-        default:
-            return searchPeopleDataSet(people);
-    }
+    case "currentspouse":
+      results = searchByCurrentSpouse(people);
+      break;
 
-    return results;
+    default:
+      return searchPeopleDataSet(people);
+  }
+
+  return results;
 }
 
 function searchById(people) {
-    const idToSearchForString = prompt('Please enter the id of the person you are searching for.');
-    const idToSearchForInt = parseInt(idToSearchForString);
-    const idFilterResults = people.filter(person => person.id === idToSearchForInt);
-    return idFilterResults;
+  const idToSearchForString = prompt(
+    "Please enter the id of the person you are searching for."
+  );
+  const idToSearchForInt = parseInt(idToSearchForString);
+  const idFilterResults = people.filter(
+    (person) => person.id === idToSearchForInt
+  );
+  return idFilterResults;
 }
+
 
 function searchByName(people) {
-    const firstNameToSearchFor = prompt('Please enter the the first name of the person you are searching for.');
-    const lastNameToSearchFor = prompt('Please enter the the last name of the person you are searching for.');
-    const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
-    return fullNameSearchResults;
+  const firstNameToSearchFor = prompt(
+    "Please enter the the first name of the person you are searching for."
+  );
+  const lastNameToSearchFor = prompt(
+    "Please enter the the last name of the person you are searching for."
+  );
+  const fullNameSearchResults = people.filter(
+    (person) =>
+      person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() &&
+      person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()
+  );
+  return fullNameSearchResults;
 }
 
-function searchByGender(people) {
-    const genderToSearchFor = prompt('Please enter the the gender of the person you are searching for.');
-    const genderSearchResults = people.filter(person => (person.gender.toLowerCase() === genderToSearchFor.toLowerCase() ));
-    return genderSearchResults;
-}
-
-function searchByDob(people) {
-    const dobToSearchFor = prompt('Please enter the the date of birth of the person you are searching for.');
-    const dobSearchResults = people.filter(person => (person.dob.toLowerCase() === dobToSearchFor.toLowerCase() ));
-    return dobSearchResults;
-}
-
-function searchByHeight(people) {
-    const heightToSearchForString = prompt('Please enter the the height of the person you are searching for.');
-    const heightToSearchForInt = parseInt(heightToSearchForString);
-    const heightSearchResults = people.filter(person => person.height === heightToSearchForInt);
-    return heightSearchResults;
-}
-
-function searchByWeight(people) {
-    const weightToSearchForString = prompt('Please enter the the weight of the person you are searching for.');
-    const weightToSearchForInt = parseInt(weightToSearchForString);
-    const weightSearchResults = people.filter(person => person.weight === weightToSearchForInt);
-    return weightSearchResults;
-}
-
-function searchByEyeColor(people) {
-    const eyeColorToSearchFor = prompt('Please enter the the eye color of the person you are searching for.');
-    const eyeColorSearchResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase() ));
-    return eyeColorSearchResults;
-}
-
-function searchByOccupation(people) {
-    const occupationToSearchFor = prompt('Please enter the the eye color of the person you are searching for.');
-    const occupationSearchResults = people.filter(person => (person.occupation.toLowerCase() === occupationToSearchFor.toLowerCase() ));
-    return occupationSearchResults;
-}
+function searchByTrait(people) {
+    const traitToSearchFor = validatedPrompt(
+      "What trait do you want to search by?",
+      ["gender", "height", "weight", "eyecolor", "occupation", "dob"]
+    );
+    const query = prompt(
+      `please enter the ${traitToSearchFor} of the person you are searching for`
+    );
+    const traitResults = people.filter(function (person) {
+      return person[traitToSearchFor] == query;
+    });
+    return traitResults;
+  }
 
 
-
-
+  
 
 function mainMenu(person, people) {
+  const mainMenuUserActionChoice = validatedPrompt(
+    `Person: ${person.firstName} ${person.lastName}\n\nDo you want to know their full information, family, or descendants?`,
+    ["info", "family", "descendants", "quit"]
+  );
 
-    const mainMenuUserActionChoice = validatedPrompt(
-        `Person: ${person.firstName} ${person.lastName}\n\nDo you want to know their full information, family, or descendants?`,
-        ['info', 'family', 'descendants', 'quit']
-    );
+  switch (mainMenuUserActionChoice) {
+    case "info":
+      //! TODO
+      // displayPersonInfo(person);
+      break;
+    case "family":
+      //! TODO
+      // let personFamily = findPersonFamily(person, people);
+      // displayPeople('Family', personFamily);
+      break;
+    case "descendants":
+      //! TODO
+      // let personDescendants = findPersonDescendants(person, people);
+      // displayPeople('Descendants', personDescendants);
+      break;
+    case "quit":
+      return;
+    default:
+      alert("Invalid input. Please try again.");
+  }
 
-    switch (mainMenuUserActionChoice) {
-        case "info":
-            //! TODO
-            // displayPersonInfo(person);
-            break;
-        case "family":
-            //! TODO
-            // let personFamily = findPersonFamily(person, people);
-            // displayPeople('Family', personFamily);
-            break;
-        case "descendants":
-            //! TODO
-            // let personDescendants = findPersonDescendants(person, people);
-            // displayPeople('Descendants', personDescendants);
-            break;
-        case "quit":
-            return;
-        default:
-            alert('Invalid input. Please try again.');
-    }
-
-    return mainMenu(person, people);
+  return mainMenu(person, people);
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
-    const formatedPeopleDisplayText = peopleToDisplay.map(person => `${person.firstName} ${person.lastName}`).join('\n');
-    alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
+  const formatedPeopleDisplayText = peopleToDisplay
+    .map((person) => `${person.firstName} ${person.lastName}`)
+    .join("\n");
+  alert(`${displayTitle}\n\n${formatedPeopleDisplayText}`);
 }
 
 function validatedPrompt(message, acceptableAnswers) {
-    acceptableAnswers = acceptableAnswers.map(aa => aa.toLowerCase());
+  acceptableAnswers = acceptableAnswers.map((aa) => aa.toLowerCase());
 
-    const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers.map(aa => `\n-> ${aa}`).join('')}`;
+  const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers
+    .map((aa) => `\n-> ${aa}`)
+    .join("")}`;
 
-    const userResponse = prompt(builtPromptWithAcceptableAnswers).toLowerCase();
+  const userResponse = prompt(builtPromptWithAcceptableAnswers).toLowerCase();
 
-    if (acceptableAnswers.includes(userResponse)) {
-        return userResponse;
-    }
-    else {
-        alert(`"${userResponse}" is not an acceptable response. The acceptable responses include:\n${acceptableAnswers.map(aa => `\n-> ${aa}`).join('')} \n\nPlease try again.`);
-        return validatedPrompt(message, acceptableAnswers);
-    }
+  if (acceptableAnswers.includes(userResponse)) {
+    return userResponse;
+  } else {
+    alert(
+      `"${userResponse}" is not an acceptable response. The acceptable responses include:\n${acceptableAnswers
+        .map((aa) => `\n-> ${aa}`)
+        .join("")} \n\nPlease try again.`
+    );
+    return validatedPrompt(message, acceptableAnswers);
+  }
 }
 
 function exitOrRestart(people) {
-    const userExitOrRestartChoice = validatedPrompt(
-        'Would you like to exit or restart?',
-        ['exit', 'restart']
-    );
+  const userExitOrRestartChoice = validatedPrompt(
+    "Would you like to exit or restart?",
+    ["exit", "restart"]
+  );
 
-    switch (userExitOrRestartChoice) {
-        case 'exit':
-            return;
-        case 'restart':
-            return app(people);
-        default:
-            alert('Invalid input. Please try again.');
-            return exitOrRestart(people);
-    }
-
+  switch (userExitOrRestartChoice) {
+    case "exit":
+      return;
+    case "restart":
+      return app(people);
+    default:
+      alert("Invalid input. Please try again.");
+      return exitOrRestart(people);
+  }
 }
