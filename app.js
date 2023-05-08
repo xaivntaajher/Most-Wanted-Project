@@ -28,7 +28,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'traits']
+        ['id', 'name', 'traits', 'gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation', 'parents', 'currentSpouse']
     );
 
     let results = [];
@@ -39,10 +39,28 @@ function searchPeopleDataSet(people) {
         case 'name':
             results = searchByName(people);
             break;
-        case 'traits':
-            //! TODO
-            // results = searchByTraits(people);
+        case 'gender':
+            results = searchByGender(people);
             break;
+        case 'dob':
+            results = searchByDob(people);
+            break;
+        case 'height':
+            results = searchByHeight(people);
+            break;
+        case 'weight':
+            results = searchByWeight(people);
+            break;
+        case 'eyeColor':
+            results = searchByEyeColor(people);
+            break;
+        case 'occupation':
+            results = searchByOccupation(people);
+            break;    
+        case 'currentSpouse':
+            results = searchByCurrentSpouse(people);
+            break;    
+            
         default:
             return searchPeopleDataSet(people);
     }
@@ -62,6 +80,12 @@ function searchByName(people) {
     const lastNameToSearchFor = prompt('Please enter the the last name of the person you are searching for.');
     const fullNameSearchResults = people.filter(person => (person.firstName.toLowerCase() === firstNameToSearchFor.toLowerCase() && person.lastName.toLowerCase() === lastNameToSearchFor.toLowerCase()));
     return fullNameSearchResults;
+}
+
+function searchByGender(people) {
+    const genderToSearchFor = prompt('Please enter the the gender of the person you are searching for.');
+    const genderSearchResults = people.filter(person => (person.gender.toLowerCase() === genderToSearchFor.toLowerCase() && person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
+    return genderSearchResults;
 }
 
 function mainMenu(person, people) {
