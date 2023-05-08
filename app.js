@@ -101,6 +101,20 @@ function searchByHeight(people) {
     return heightSearchResults;
 }
 
+function searchByWeight(people) {
+    const weightToSearchForString = prompt('Please enter the the weight of the person you are searching for.');
+    const weightToSearchForInt = parseInt(weightToSearchForString);
+    const weightSearchResults = people.filter(person => person.weight === weightToSearchForInt);
+    return weightSearchResults;
+}
+
+function searchByEyeColor(people) {
+    const eyeColorToSearchFor = prompt('Please enter the the eye color of the person you are searching for.');
+    const eyeColorSearchResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase() && person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
+    return eyeColorSearchResults;
+}
+
+
 
 
 function mainMenu(person, people) {
