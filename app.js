@@ -88,6 +88,21 @@ function searchByGender(people) {
     return genderSearchResults;
 }
 
+function searchByDob(people) {
+    const dobToSearchFor = prompt('Please enter the the date of birth of the person you are searching for.');
+    const dobSearchResults = people.filter(person => (person.dob.toLowerCase() === dobToSearchFor.toLowerCase() && person.dob.toLowerCase() === dobToSearchFor.toLowerCase()));
+    return dobSearchResults;
+}
+
+function searchByHeight(people) {
+    const heightToSearchForString = prompt('Please enter the the height of the person you are searching for.');
+    const heightToSearchForInt = parseInt(heightToSearchForString);
+    const heightSearchResults = people.filter(person => person.height === heightToSearchForInt);
+    return heightSearchResults;
+}
+
+
+
 function mainMenu(person, people) {
 
     const mainMenuUserActionChoice = validatedPrompt(
