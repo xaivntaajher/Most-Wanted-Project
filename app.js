@@ -44,24 +44,7 @@ function searchPeopleDataSet(people) {
     case "traits":
       results = searchByTrait(people);
       break;
-    case "gender":
-      results = searchByGender(people);
-      break;
-    case "dob":
-      results = searchByDob(people);
-      break;
-    case "height":
-      results = searchByHeight(people);
-      break;
-    case "weight":
-      results = searchByWeight(people);
-      break;
-    case "eyecolor":
-      results = searchByEyeColor(people);
-      break;
-    case "occupation":
-      results = searchByOccupation(people);
-      break;
+
     case "parents":
       results = searchByParents(people);
       break;
@@ -110,7 +93,7 @@ function searchByTrait(people) {
       ["gender", "height", "weight", "eyecolor", "occupation", "dob"]
     );
     const query = prompt(
-      `please enter the ${traitToSearchFor} of the person you are searching for`
+      `Please enter the ${traitToSearchFor} of the person you are searching for`
     );
     const traitResults = people.filter(function (person) {
       return person[traitToSearchFor] == query;
@@ -119,7 +102,8 @@ function searchByTrait(people) {
   }
 
 
-  
+
+
 
 function mainMenu(person, people) {
   const mainMenuUserActionChoice = validatedPrompt(
