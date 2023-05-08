@@ -28,7 +28,7 @@ function searchPeopleDataSet(people) {
 
     const searchTypeChoice = validatedPrompt(
         'Please enter in what type of search you would like to perform.',
-        ['id', 'name', 'traits', 'gender', 'dob', 'height', 'weight', 'eyeColor', 'occupation', 'parents', 'currentSpouse']
+        ['id', 'name', 'traits', 'gender', 'dob', 'height', 'weight', 'eyecolor', 'occupation', 'parents', 'currentSpouse']
     );
 
     let results = [];
@@ -51,7 +51,7 @@ function searchPeopleDataSet(people) {
         case 'weight':
             results = searchByWeight(people);
             break;
-        case 'eyeColor':
+        case 'eyecolor':
             results = searchByEyeColor(people);
             break;
         case 'occupation':
@@ -84,13 +84,13 @@ function searchByName(people) {
 
 function searchByGender(people) {
     const genderToSearchFor = prompt('Please enter the the gender of the person you are searching for.');
-    const genderSearchResults = people.filter(person => (person.gender.toLowerCase() === genderToSearchFor.toLowerCase() && person.gender.toLowerCase() === genderToSearchFor.toLowerCase()));
+    const genderSearchResults = people.filter(person => (person.gender.toLowerCase() === genderToSearchFor.toLowerCase() ));
     return genderSearchResults;
 }
 
 function searchByDob(people) {
     const dobToSearchFor = prompt('Please enter the the date of birth of the person you are searching for.');
-    const dobSearchResults = people.filter(person => (person.dob.toLowerCase() === dobToSearchFor.toLowerCase() && person.dob.toLowerCase() === dobToSearchFor.toLowerCase()));
+    const dobSearchResults = people.filter(person => (person.dob.toLowerCase() === dobToSearchFor.toLowerCase() ));
     return dobSearchResults;
 }
 
@@ -110,7 +110,7 @@ function searchByWeight(people) {
 
 function searchByEyeColor(people) {
     const eyeColorToSearchFor = prompt('Please enter the the eye color of the person you are searching for.');
-    const eyeColorSearchResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase() && person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase()));
+    const eyeColorSearchResults = people.filter(person => (person.eyeColor.toLowerCase() === eyeColorToSearchFor.toLowerCase() ));
     return eyeColorSearchResults;
 }
 
