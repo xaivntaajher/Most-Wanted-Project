@@ -57,7 +57,7 @@ function searchPeopleDataSet(people) {
         case 'occupation':
             results = searchByOccupation(people);
             break;    
-        case 'currentSpouse':
+        case 'currentspouse':
             results = searchByCurrentSpouse(people);
             break;    
             
@@ -114,6 +114,11 @@ function searchByEyeColor(people) {
     return eyeColorSearchResults;
 }
 
+function searchByOccupation(people) {
+    const occupationToSearchFor = prompt('Please enter the the eye color of the person you are searching for.');
+    const occupationSearchResults = people.filter(person => (person.occupation.toLowerCase() === occupationToSearchFor.toLowerCase() ));
+    return occupationSearchResults;
+}
 
 
 
