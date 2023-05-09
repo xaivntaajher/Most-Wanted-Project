@@ -44,15 +44,6 @@ function searchPeopleDataSet(people) {
     case "traits":
       results = searchByTrait(people);
       break;
-
-    case "parents":
-      results = searchByParents(people);
-      break;
-
-    case "currentspouse":
-      results = searchByCurrentSpouse(people);
-      break;
-
     default:
       return searchPeopleDataSet(people);
   }
@@ -70,7 +61,6 @@ function searchById(people) {
   );
   return idFilterResults;
 }
-
 
 function searchByName(people) {
   const firstNameToSearchFor = prompt(
@@ -101,10 +91,6 @@ function searchByTrait(people) {
     return traitResults;
   }
 
-
-
-
-
 function mainMenu(person, people) {
   const mainMenuUserActionChoice = validatedPrompt(
     `Person: ${person.firstName} ${person.lastName}\n\nDo you want to know their full information, family, or descendants?`,
@@ -113,9 +99,9 @@ function mainMenu(person, people) {
 
   switch (mainMenuUserActionChoice) {
     case "info":
-      //! TODO
-      // displayPersonInfo(person);
-      break;
+      results = displayPersonInfo(person)
+      return results;
+      
     case "family":
       //! TODO
       // let personFamily = findPersonFamily(person, people);
@@ -131,6 +117,20 @@ function mainMenu(person, people) {
     default:
       alert("Invalid input. Please try again.");
   }
+
+  function displayPersonInfo(){
+    let results = `
+    Name: ${person.firstName} ${person.lastName}
+    Gender: ${person.gender}
+    Date of Birth: ${person.dob}
+    Height: ${person.height}
+    Weight: ${person.weight}
+    Eye Color: ${person.eyeColor}
+    Occupation: ${person.occupation}
+    Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "Unknown"}
+    Spouse: ${person.currentSpouse ? person.currentSpouse : "Unknown"}`;
+    return results
+} 
 
   return mainMenu(person, people);
 }
