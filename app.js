@@ -100,7 +100,7 @@ function mainMenu(person, people) {
   switch (mainMenuUserActionChoice) {
     case "info":
       results = displayPersonInfo(person)
-      return results;
+      alert(results);
       
     case "family":
       //! TODO
@@ -117,22 +117,21 @@ function mainMenu(person, people) {
     default:
       alert("Invalid input. Please try again.");
   }
-
-  function displayPersonInfo(){
-    let results = `
-    Name: ${person.firstName} ${person.lastName}
-    Gender: ${person.gender}
-    Date of Birth: ${person.dob}
-    Height: ${person.height}
-    Weight: ${person.weight}
-    Eye Color: ${person.eyeColor}
-    Occupation: ${person.occupation}
-    Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "Unknown"}
-    Spouse: ${person.currentSpouse ? person.currentSpouse : "Unknown"}`;
-    return results
+  return mainMenu(person, people);
 } 
 
-  return mainMenu(person, people);
+function displayPersonInfo(person){
+  let results = `
+  Name: ${person.firstName} ${person.lastName}
+  Gender: ${person.gender}
+  Date of Birth: ${person.dob}
+  Height: ${person.height}
+  Weight: ${person.weight}
+  Eye Color: ${person.eyeColor}
+  Occupation: ${person.occupation}
+  Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "Unknown"}
+  Spouse: ${person.currentSpouse ? person.currentSpouse : "Unknown"}`;
+  return results
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
