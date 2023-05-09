@@ -90,7 +90,7 @@ function searchByName(people) {
 function searchByTrait(people) {
     const traitToSearchFor = validatedPrompt(
       "What trait do you want to search by?",
-      ["gender", "height", "weight", "eyecolor", "occupation", "dob"]
+      ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
     );
     const query = prompt(
       `Please enter the ${traitToSearchFor} of the person you are searching for`
@@ -143,14 +143,14 @@ function displayPeople(displayTitle, peopleToDisplay) {
 }
 
 function validatedPrompt(message, acceptableAnswers) {
-  acceptableAnswers = acceptableAnswers.map((aa) => aa.toLowerCase());
+  // acceptableAnswers = acceptableAnswers.map((aa) => aa.toLowerCase());
 
   const builtPromptWithAcceptableAnswers = `${message} \nAcceptable Answers: ${acceptableAnswers
     .map((aa) => `\n-> ${aa}`)
     .join("")}`;
 
-  const userResponse = prompt(builtPromptWithAcceptableAnswers).toLowerCase();
-
+  const userResponse = prompt(builtPromptWithAcceptableAnswers);
+ 
   if (acceptableAnswers.includes(userResponse)) {
     return userResponse;
   } else {
