@@ -99,19 +99,20 @@ function mainMenu(person, people) {
 
   switch (mainMenuUserActionChoice) {
     case "info":
-      results = displayPersonInfo(person)
+      let results = displayPersonInfo(person)
       alert(results);
       
     case "family":
       //! TODO
-      // let personFamily = findPersonFamily(person, people);
+      let personFamily = findPersonFamily(person, people);
       // displayPeople('Family', personFamily);
-      break;
+      alert(personFamily)
+
     case "descendants":
       //! TODO
       // let personDescendants = findPersonDescendants(person, people);
       // displayPeople('Descendants', personDescendants);
-      break;
+      // break;
     case "quit":
       return;
     default:
@@ -129,9 +130,29 @@ function displayPersonInfo(person){
   Weight: ${person.weight}
   Eye Color: ${person.eyeColor}
   Occupation: ${person.occupation}
-  Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "Unknown"}
-  Spouse: ${person.currentSpouse ? person.currentSpouse : "Unknown"}`;
+  Parents: ${person.parents}
+  Spouse: ${person.currentSpouse}`; 
   return results
+  
+  // Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "null"}
+  // Spouse: ${person.currentSpouse ? person.currentSpouse : "null"}`; // short hand for an if/else statement
+}
+
+function findPersonFamily(person, people){
+  let result = `
+  Parent: ${person.parents}
+  Spouse: ${person.currentSpouse}
+  Sibling: ${person.sibling}`
+    
+  // let parents = people.map(function(person){
+  //   return person.parents
+  // })
+    
+  let sibling;
+  sibling = people.filter(function(person){
+    return person.parents === people.parents;
+  })
+  return result
 }
 
 function displayPeople(displayTitle, peopleToDisplay) {
