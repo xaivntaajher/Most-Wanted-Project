@@ -110,9 +110,10 @@ function mainMenu(person, people) {
 
     case "descendants":
       //! TODO
-      // let personDescendants = findPersonDescendants(person, people);
+      let personDescendants = findPersonDescendants(person, people);
+      alert(personDescendants)
       // displayPeople('Descendants', personDescendants);
-      // break;
+    
     case "quit":
       return;
     default:
@@ -156,6 +157,27 @@ function findPersonFamily(person, people) {
   displayPeople("Siblings", siblingResults);
 }
 
+
+function findPersonDescendants(person, people){
+
+  let childDescendant = people.filter(function (child) {
+    return child.parents[0] === person.id || child.parents[1] === person.id;
+
+  });
+  displayPeople("Child", childDescendant);
+  
+  
+  let grandChildDescendant = childDescendant.filter(function(grandChild){
+    return grandChild.parents[0] === childDescendant.id || grandChild.parents[1] === childDescendant.id;
+  });  
+
+
+  displayPeople("Grand Child", grandChildDescendant);
+
+}
+
+      
+//Starter Code Below
 
 function displayPeople(displayTitle, peopleToDisplay) {
   const formatedPeopleDisplayText = peopleToDisplay
