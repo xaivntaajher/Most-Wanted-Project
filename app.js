@@ -28,8 +28,6 @@ function searchPeopleDataSet(people) {
       "id",
       "name",
       "traits",
-      "parents",
-      "currentSpouse",
     ]
   );
 
@@ -78,18 +76,46 @@ function searchByName(people) {
 }
 
 function searchByTrait(people) {
-    const traitToSearchFor = validatedPrompt(
+  
+  const traitToSearchFor = validatedPrompt(
       "What trait do you want to search by?",
       ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
     );
     const query = prompt(
       `Please enter the ${traitToSearchFor} of the person you are searching for`
     );
+
+    return traitToSearchFor
+    }
+
+
+function searchByTrait2(people) {
+  
+  // const traitToSearchFor = validatedPrompt(
+  //     "What trait do you want to search by?",
+  //     ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
+  //   );
+  //   const query = prompt(
+  //     `Please enter the ${traitToSearchFor} of the person you are searching for`
+  //   );
+    searchByTrait()
+
     const traitResults = people.filter(function (person) {
       return person[traitToSearchFor] == query;
+
     });
     return traitResults;
   }
+
+
+// function searchByMultipleTraits() {
+//   const newArray = ['gender','height','weight','eyeColor','occupation','dob']
+//   const multipleTraitSearch = validatedPrompt(
+//     "What other trait would you like to search by?", []
+//   );
+//   searchByTrait(multipleTraitSearch)
+// }
+
 
 function mainMenu(person, people) {
   const mainMenuUserActionChoice = validatedPrompt(
@@ -99,8 +125,9 @@ function mainMenu(person, people) {
 
   switch (mainMenuUserActionChoice) {
     case "info":
-      let results = displayPersonInfo(person)
-      alert(results);
+      let info = displayPersonInfo(person)
+      alert(info);
+      break;
       
     case "family":
       //! TODO
@@ -133,10 +160,7 @@ function displayPersonInfo(person){
   Occupation: ${person.occupation}
   Parents: ${person.parents}
   Spouse: ${person.currentSpouse}`; 
-  return results
-  
-  // Parents: ${person.parents.length > 0 ? person.parents.join(", ") : "null"}
-  // Spouse: ${person.currentSpouse ? person.currentSpouse : "null"}`; // short hand for an if/else statement
+  return results;
 }
 
 
