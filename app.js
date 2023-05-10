@@ -105,14 +105,14 @@ function mainMenu(person, people) {
     case "family":
       //! TODO
       let personFamily = findPersonFamily(person, people);
-      // displayPeople('Family', personFamily);
-      alert(personFamily)
+      displayPeople('Family', personFamily);
+      break;
 
     case "descendants":
       //! TODO
       let personDescendants = findPersonDescendants(person, people);
-      alert(personDescendants)
-      // displayPeople('Descendants', personDescendants);
+      displayPeople('Descendants', personDescendants);
+      break;
     
     case "quit":
       return;
@@ -167,10 +167,18 @@ function findPersonDescendants(person, people){
   displayPeople("Child", childDescendant);
   
   
-  let grandChildDescendant = childDescendant.filter(function(grandChild){
-    return grandChild.parents[0] === childDescendant.id || grandChild.parents[1] === childDescendant.id;
+  let grandChildDescendant = people.filter(function(grandChild){
+    if (grandChild.parents.length === 0) {
+      return false;
+    } else {
+      for ( let i = 0; i < childDescendant.length; i++) {
+        if (grandChild.parents.includes(childDescendant[i].id)){
+          return true;
+        }
+      }
+        return false
+      }
   });  
-
 
   displayPeople("Grand Child", grandChildDescendant);
 
