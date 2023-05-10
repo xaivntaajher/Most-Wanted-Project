@@ -138,22 +138,24 @@ function displayPersonInfo(person){
   // Spouse: ${person.currentSpouse ? person.currentSpouse : "null"}`; // short hand for an if/else statement
 }
 
-function findPersonFamily(person, people){
-  let result = `
-  Parent: ${person.parents}
-  Spouse: ${person.currentSpouse}
-  Sibling: ${person.sibling}`
-    
-  // let parents = people.map(function(person){
-  //   return person.parents
-  // })
-    
-  let sibling;
-  sibling = people.filter(function(person){
-    return person.parents === people.parents;
-  })
-  return result
+
+function findPersonFamily(person, people) {
+  let parentResults = people.filter(function (p) {
+    return p.id === person.parents[0] || p.id === person.parents[1];
+  });
+  displayPeople("Parents", parentResults);
+
+  let spouseResults = people.filter(function (p) {
+    return p.id === person.currentSpouse;
+  });
+  displayPeople("Spouse", spouseResults);
+
+  let siblingResults = people.filter(function (p) {
+    return p.parents[0] === person.parents[0] || p.parents[1] === person.parents[1];
+  });
+  displayPeople("Siblings", siblingResults);
 }
+
 
 function displayPeople(displayTitle, peopleToDisplay) {
   const formatedPeopleDisplayText = peopleToDisplay
