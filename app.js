@@ -76,35 +76,31 @@ function searchByName(people) {
 }
 
 function searchByTrait(people) {
+  let results = people;
 
-  const traitToSearchFor = validatedPrompt(
+  while (true) {
+    const traitToSearchFor = validatedPrompt(
       "What trait do you want to search by?",
       ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
     );
+
     const query = prompt(
       `Please enter the ${traitToSearchFor} of the person you are searching for`
     );
-    const traitResults = people.filter(function (person) {
+
+    results = results.filter(function (person) {
       return person[traitToSearchFor] == query;
-
     });
-    {displayPeople('query1 results',traitResults)}
 
-    let query2 = prompt("would you like to filter more 'yes' or 'no'")
-      if (query2 != 'yes'){return traitResults}
-      else if (query2 = 'yes'){
-        let query3 = prompt('what trait would you like to filter by: "gender", "height", "weight", "eyeColor", "occupation", "dob"');
-          if (query3 = 'gender'){
-            trait2 = traitResults.filter(function(){
-              return trait2
-            })
-          }
+    displayPeople(`Results for ${traitToSearchFor}: ${query}`, results);
 
+    const continueFiltering = prompt("Do you want to filter by another trait? (yes/no)");
 
-        }    
-
-    
+    if (continueFiltering.toLowerCase() !== "yes") {
+      return results;
     }
+  }
+}
 
 
 
