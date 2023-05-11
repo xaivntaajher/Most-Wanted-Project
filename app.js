@@ -76,7 +76,7 @@ function searchByName(people) {
 }
 
 function searchByTrait(people) {
-  
+
   const traitToSearchFor = validatedPrompt(
       "What trait do you want to search by?",
       ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
@@ -84,37 +84,29 @@ function searchByTrait(people) {
     const query = prompt(
       `Please enter the ${traitToSearchFor} of the person you are searching for`
     );
-
-    return traitToSearchFor
-    }
-
-
-function searchByTrait2(people) {
-  
-  // const traitToSearchFor = validatedPrompt(
-  //     "What trait do you want to search by?",
-  //     ["gender", "height", "weight", "eyeColor", "occupation", "dob"]
-  //   );
-  //   const query = prompt(
-  //     `Please enter the ${traitToSearchFor} of the person you are searching for`
-  //   );
-    searchByTrait()
-
     const traitResults = people.filter(function (person) {
       return person[traitToSearchFor] == query;
 
     });
-    return traitResults;
-  }
+    {displayPeople('query1 results',traitResults)}
+
+    let query2 = prompt("would you like to filter more 'yes' or 'no'")
+      if (query2 != 'yes'){return traitResults}
+      else if (query2 = 'yes'){
+        let query3 = prompt('what trait would you like to filter by: "gender", "height", "weight", "eyeColor", "occupation", "dob"');
+          if (query3 = 'gender'){
+            trait2 = traitResults.filter(function(){
+              return trait2
+            })
+          }
 
 
-// function searchByMultipleTraits() {
-//   const newArray = ['gender','height','weight','eyeColor','occupation','dob']
-//   const multipleTraitSearch = validatedPrompt(
-//     "What other trait would you like to search by?", []
-//   );
-//   searchByTrait(multipleTraitSearch)
-// }
+        }    
+
+    
+    }
+
+
 
 
 function mainMenu(person, people) {
