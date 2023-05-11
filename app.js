@@ -163,11 +163,17 @@ function findPersonFamily(person, people) {
   });
   displayPeople("Spouse", spouseResults);
 
+
   let siblingResults = people.filter(function (p) {
-    if (p.parents = []){
-      return alert('There are no siblings');
-    } else {
-      return p.parents[0] === person.parents[0] || p.parents[1] === person.parents[1];
+    //removes person duplicating in siblings
+    if(p.id === person.id){
+      return false;}
+    
+    if (person.parents == undefined) { 
+    return false} 
+      
+    else {
+      return p.parents[0] === person.parents[0] || p.parents[1] === person.parents[1]  && person.parents != [''];
     }   
   });
   displayPeople("Siblings", siblingResults);
@@ -195,9 +201,7 @@ function findPersonDescendants(person, people){
       return false;
     }
   });
-  displayPeople("Grandchildren", grandChildDescendant);
-  return grandChildDescendant;
-}
+  displayPeople("Grandchildren", grandChildDescendant);}
 
       
 //Starter Code Below
