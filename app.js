@@ -115,19 +115,19 @@ function mainMenu(person, people) {
     case "info":
       let info = displayPersonInfo(person)
       alert(info);
-      break;
+      return;
       
     case "family":
       //! TODO
       let personFamily = findPersonFamily(person, people);
       displayPeople('Family', personFamily);
-      break;
+      return;
 
     case "descendants":
       //! TODO
       let personDescendants = findPersonDescendants(person, people);
       displayPeople('Descendants', personDescendants);
-      break;
+      return;
     
     case "quit":
       return;
@@ -164,7 +164,11 @@ function findPersonFamily(person, people) {
   displayPeople("Spouse", spouseResults);
 
   let siblingResults = people.filter(function (p) {
-    return p.parents[0] === person.parents[0] || p.parents[1] === person.parents[1];
+    if (p.parents = []){
+      return alert('There are no siblings');
+    } else {
+      return p.parents[0] === person.parents[0] || p.parents[1] === person.parents[1];
+    }   
   });
   displayPeople("Siblings", siblingResults);
 }
@@ -183,17 +187,16 @@ function findPersonDescendants(person, people){
     if (grandChild.parents.length === 0) {
       return false;
     } else {
-      for ( let i = 0; i < childDescendant.length; i++) {
-        if (grandChild.parents.includes(childDescendant[i].id)){
+      for ( let i = 0; i < childDescendant.length; i++){
+        if(grandChild.parents[0] === childDescendant[i].id || grandChild.parents[1] === childDescendant[i].id){
           return true;
         }
       }
-        return false
-      }
-  });  
-
-  displayPeople("Grand Child", grandChildDescendant);
-
+      return false;
+    }
+  });
+  displayPeople("Grandchildren", grandChildDescendant);
+  return grandChildDescendant;
 }
 
       
